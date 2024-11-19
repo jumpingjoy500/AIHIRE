@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+<div class="form-container">
+<form method="POST">
+	<h3>Sign In</h3>
+	<p class="create-account-text">
+		New User? <a href="/sign-up" class="sign-up-link">Create an account</a>
+	</p>	
+	<div class="login">
+		<label for="email">Email</label>
+		<input type="email" class="form-control" id="email" name="email" placeholder="Enter email"/>
+	</div>
+	<div class="login">
+		<label for="username">Username</label>
+		<input type="text" class="form-control" id="username" name="username" placeholder="Enter username"/>
+	</div>
+	<div class="login">
+		<label for="password">Password</label>
+		<input type="password" class="form-control" id="password" name="password" placeholder="Enter password"/>
+	</div>
+	<br />
+	<button type="submit" class="btn-primary">SIGN IN</button>
+</form>
+</div>
+{% endblock %}
+
+
+

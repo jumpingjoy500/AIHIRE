@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.33.0/min/vs/loader.js"></script>
+
+  	<link rel="stylesheet" href="{{ url_for('static', filename='nav.css') }}" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='global.css') }}" />
+  	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jura:wght@700&display=swap" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <title>{% block title %}AI Hire{% endblock %}</title>
+</head>
+<body>
+    <div class="nav-links"> 
+        <nav>
+            <img class="ai-hire" alt="Logo" src="{{ url_for('static', filename='AI HIRE.png') }}">
+            <ul>
+                <li><a href="/">HOME</a></li>
+                <li><a href="/about">ABOUT</a></li>
+                <li><a href="/behavioral">PRACTICE BEHAVIORAL</a></li>
+                <li><a href="/technical">PRACTICE TECHNICAL</a></li>
+            </ul>
+                <img class="vector-icon" alt="Profile Icon" src="{{ url_for('static', filename='profile.png') }}" onclick="toggleMenu()">
+
+            <div class="sub-menu-wrap" id="subMenu">
+                <div class="sub-menu">
+                    <div class="user-info">
+                        <img class="vector-icon" alt="Profile Icon" src="{{ url_for('static', filename='profile.png') }}">
+                        {% if user.is_authenticated %}
+                            <h3>{{ user.username }}</h3>
+                        {% else %}
+                            <h3>Guest</h3>
+                        {% endif %}
+                    </div>
+                    <hr>
+                    {% if user.is_authenticated %}
+                    <a href = "/profile" class="sub-menu-link">
+                        <img class="vector-icon" alt="Profile2 Icon" src="{{ url_for('static', filename='profile2.png') }}">
+                        <p>Edit Profile</p>
+                        <span>></span> 
+                    </a>
+                    <a href = "/logout" class="sub-menu-link">
+                        <img class="vector-icon" alt="Logout Icon" src="{{ url_for('static', filename='logout.png') }}">
+                        <p>Logout</p>
+                        <span>></span> 
+                    </a>
+                    {% else %}
+                    <a href = "/login" class="sub-menu-link">
+                        <img class="vector-icon" alt="Login Icon" src="{{ url_for('static', filename='logout.png') }}">
+                        <p>Log In</p>
+                        <span>></span> 
+                    </a>
+                    <a href = "/sign-up" class="sub-menu-link">
+                        <img class="vector-icon" alt="Sign Up Icon" src="{{ url_for('static', filename='logout.png') }}">
+                        <p>Sign Up</p>
+                        <span>></span> 
+                    </a>
+                    {% endif %}
+                </div>
+            </div>    
+        </nav>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    </div>
+
+    <div class="container">{% block content %} {% endblock %}</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-5LcWxTuKsTnF4HihxPTf0UyRz4PoG4yEtGKHZHx3b8nE0nD7VNOJoWWjyKD6pklt" 
+    crossorigin="anonymous"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+          const closeButtons = document.querySelectorAll('.alert .btn-close');
+          closeButtons.forEach(button => {
+              button.addEventListener('click', function () {
+                  const alert = button.closest('.alert');
+                  alert.classList.remove('show');
+                  alert.addEventListener('transitionend', () => alert.remove());
+              });
+          });
+      });
+  </script>    
+        <script>
+        let subMenu = document.getElementById("subMenu");
+
+        function toggleMenu() {
+            subMenu.classList.toggle("open-menu");
+        }
+    </script>
+</body>
+</html>
