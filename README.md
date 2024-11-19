@@ -17,16 +17,6 @@ Backend: Python, Flask
 Database: SQLAlchemy
 AI Tools: OpenAI and Hugging Face Transformers
 
-### Project Structure
-
-AIHire/
-├── static/                # Static files (CSS, images, JavaScript)
-├── templates/             # HTML templates for web pages
-├── views.py               # Main Flask application file
-├── requirements.txt       # Python dependencies
-├── README.md              # Project documentation
-└── ... (other project files)
-
 ### Installation
 Clone the Repository:
 git clone https://github.com/jumpingjoy500/aihire.git
